@@ -14,7 +14,7 @@ def generate_ddr_json(prompt_input):
         return {"error": "Google API Key not found. Please set GOOGLE_API_KEY in .env file."}
 
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-1.5-pro-latest')
+    model = genai.GenerativeModel('gemini-1.5-pro')
 
     system_instruction = """
     You are an Applied AI Report Builder. Your task is to generate a Detailed Diagnostic Report (DDR) from raw inspection and thermal data.
