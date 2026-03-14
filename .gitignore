@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Streamlit
+.streamlit/
+
+# Project Specific
+temp_processing/
+assets/inspection/
+assets/thermal/
+*.pdf
+*.html
