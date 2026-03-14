@@ -19,7 +19,7 @@ Convert raw Inspection and Thermal PDF reports into structured, client-ready Det
 # Setup sidebar for configuration
 with st.sidebar:
     st.header("Configuration")
-    api_key = st.text_input("Google API Key", value=os.getenv("GOOGLE_API_KEY", ""), type="password")
+    api_key = st.text_input("Google API Key", value=os.getenv("GOOGLE_API_KEY", ""), type="password").strip()
     if api_key:
         os.environ["GOOGLE_API_KEY"] = api_key
     st.info("Ensure you have a valid Gemini API Key.")
