@@ -50,15 +50,34 @@ def generate_ddr_json(prompt_input):
     
     try:
         # Extract JSON from response (handling potential markdown formatting)
-        content = response.text
+        content = response.text.strip()
+        
+        # Look for JSON blocks
         if "```json" in content:
             content = content.split("```json")[1].split("```")[0].strip()
         elif "```" in content:
-            content = content.split("```")[1].split("```")[0].strip()
+            # Fallback to general code blocks if 'json' is not specified
+            blocks = content.split("```")
+            for block in blocks:
+                block = block.strip()
+                if block.startswith("{") and block.endswith("}"):
+                    content = block
+                    break
         
+        # Final cleanup for common AI artifacts
+        content = content.strip()
+        if not (content.startswith("{") or content.startswith("[")):
+            # Try to find the first '{' and last '}'
+            start = content.find("{")
+            end = content.rfind("}")
+            if start != -1 and end != -1:
+                content = content[start:end+1]
+
         return json.loads(content)
     except Exception as e:
-        return {"error": f"Failed to parse LLM response: {str(e)}", "raw_response": response.text}
+        error_msg = f"Failed to parse LLM response: {str(e)}"
+        print(f"ERROR: {error_msg}")
+        return {"error": error_msg, "raw_response": response.text}
 
 def get_ddr_report(processed_data):
     """ Orchestrates the AI reasoning and returns the structured report. """

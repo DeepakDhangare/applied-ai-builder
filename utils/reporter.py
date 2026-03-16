@@ -46,10 +46,12 @@ HTML_TEMPLATE = """
             <p><strong>Observation:</strong> {{ area.observation }}</p>
             <p><strong>Thermal Findings:</strong> {{ area.thermal_findings }}</p>
             
-            {% if area.image_path %}
-                <img src="{{ area.image_path }}" style="max-width: 100%; border-radius: 4px; margin-top: 10px;">
+            {% if area.image_paths %}
+                {% for img_path in area.image_paths %}
+                    <img src="{{ img_path }}" style="max-width: 100%; border-radius: 4px; margin-top: 10px; display: block;">
+                {% endfor %}
             {% else %}
-                <div class="image-placeholder">Image Not Available ({{ area.image_placeholder }})</div>
+                <div class="image-placeholder">Image Not Available</div>
             {% endif %}
         </div>
         {% endfor %}
