@@ -1,0 +1,22 @@
+[project]
+name = "applied-ai-builder"
+version = "0.1.0"
+description = "Applied AI Builder - DDR Generator"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "streamlit",
+    "pdfplumber",
+    "pymupdf",
+    "google-generativeai",
+    "python-dotenv",
+    "Pillow",
+    "jinja2",
+    "fpdf2",
+]
+
+[project.scripts]
+app = "streamlit:main"
+
+[tool.setuptools]
+packages = ["utils"]
